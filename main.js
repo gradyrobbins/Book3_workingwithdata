@@ -13,18 +13,21 @@ for (let i = 0; i < githubData.length; i++) {
 }
 console.log("totalCommits " + totalCommits);
 
+
+let arr = [];
 // How many of each event type are there? (PullRequestEvent, PushEvent, etc)
     for (let i = 0; i < githubData.length; i++) {
-        console.log(githubData[i].type)
+        // console.log(`githubData ${i} type : ` + githubData[i].type)
+        arr.push(githubData[i].type);
     }
     
-    // below, courtesy of https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
-    var arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
-    var counts = {};
+// // below, courtesy of https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
+    // var arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
+    // var counts = {};
+    let counts = {};
     
     for (var i = 0; i < arr.length; i++) {
       var num = arr[i];
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
-    
-    console.log(counts[5], counts[2], counts[9], counts[4]);
+    console.table(counts);
