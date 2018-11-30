@@ -83,3 +83,15 @@ for (var i = 0; i < arr5.length; i++) {
     counts5[num] = counts5[num] ? counts5[num] + 1 : 1;
 }
 console.table(counts5);
+
+
+console.log("---------part 6")
+console.log("Which programming langugages were affected by Steve's events?")
+console.log(githubData[27].payload.pull_request.head.repo.language)
+
+for (let i = 0; i < githubData.length; i++) {
+    if(githubData[i].payload.pull_request.head.repo.language) {
+        console.log(` language# ${[i]}  : ${githubData[i].payload.pull_request.head.repo.language} `);
+    } else {console.log("bloop")}
+}
+// githubData[i].payload.pull_request.head.repo.language;
