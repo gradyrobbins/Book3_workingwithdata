@@ -85,8 +85,9 @@ for (var i = 0; i < arr5.length; i++) {
 console.table(counts5);
 
 
-console.log("---------part 6")
-console.log("Which programming langugages were affected by Steve's events?")
+console.log("---------parts 6 AND 7")
+console.log("6: Which programming langugages were affected by Steve's events?")
+console.log("7: What programming language was the most affected by Steve's events?")
 
 let arr6 = [];
 
