@@ -87,11 +87,43 @@ console.table(counts5);
 
 console.log("---------part 6")
 console.log("Which programming langugages were affected by Steve's events?")
-console.log(githubData[27].payload.pull_request.head.repo.language)
+
+let arr6 = [];
 
 for (let i = 0; i < githubData.length; i++) {
-    if(githubData[i].payload.pull_request.head.repo.language) {
-        console.log(` language# ${[i]}  : ${githubData[i].payload.pull_request.head.repo.language} `);
-    } else {console.log("bloop")}
+    // this for loop needs nested "if" statements because data is non-standard; not every 'payload' event has a 'head' so the path to "language" needs nested if statements
+    if ('pull_request' in githubData[i].payload){
+        // not all "pull_requests" have "head" so the below nested if is req'd
+        if('head' in githubData[i].payload.pull_request) {
+            var repoLang = githubData[i].payload.pull_request.head.repo.language;
+            arr6.push(repoLang);
+        }
+    }
+    
 }
-// githubData[i].payload.pull_request.head.repo.language;
+// console.log(arr6)
+let counts6 = {};
+
+for (var i = 0; i < arr6.length; i++) {
+    var num = arr6[i];
+    counts6[num] = counts6[num] ? counts6[num] + 1 : 1;
+}
+console.table(counts6);
+// console.log ("-------------------Russell's work-----------------------------------------")
+// console.log ("REQUIREMENT #6")
+
+// let repos6 = [];
+// for (let i = 0; i < githubData.length; i++) {
+    //     if ('pull_request' in githubData[i].payload){
+        //         if (githubData[i].actor.login === "stevebrownlee" || githubData[i].payload.comment.user.login === "stevebrownlee" || githubData[i].pull_request.user.login === "stevebrownlee" || githubData[i].payload.issue.user.login === "stevebrownlee" || githubData[i].payload.pull_request.merged_by.login === "stevebrownlee") {
+            
+            //             // Russell i see repoName6 declared below, but not used?
+            //             var repoName6 = githubData[i].repo.name;
+            //             var repoLang = githubData[i].payload.pull_request.head.repo.language;
+            //             if (repos6.indexOf(repoLang) === -1) {
+                //                 repos6.push(repoLang)
+                //             }
+//         }
+//     }   
+// }
+// console.log(`Steve's events affected the programming languages ${repos6[0]} and ${repos6[1]}.`);

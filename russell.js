@@ -70,6 +70,8 @@ let repos6 = [];
 for (let i = 0; i < githubData.length; i++) {
     if ('pull_request' in githubData[i].payload){
         if (githubData[i].actor.login === "stevebrownlee" || githubData[i].payload.comment.user.login === "stevebrownlee" || githubData[i].pull_request.user.login === "stevebrownlee" || githubData[i].payload.issue.user.login === "stevebrownlee" || githubData[i].payload.pull_request.merged_by.login === "stevebrownlee") {
+
+            // Russell i see repoName6 declared below, but not used?
             var repoName6 = githubData[i].repo.name;
             var repoLang = githubData[i].payload.pull_request.head.repo.language;
             if (repos6.indexOf(repoLang) === -1) {
