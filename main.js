@@ -32,12 +32,30 @@ for (var i = 0; i < arr.length; i++) {
     var num = arr[i];
     counts[num] = counts[num] ? counts[num] + 1 : 1;
 }
+console.log("How many of each event type are there? (PullRequestEvent, PushEvent, etc)")
 console.table(counts);
+
+
+console.log("-----part 2, EmLem's style")
+// courtesy EmLem:
+let eventTypes = {
+    PushEvent: 0,
+    PullRequestEvent: 0,
+    IssueCommentEvent: 0,
+    DeleteEvent: 0,
+    CreateEvent: 0
+};
+githubData.forEach(taco => {
+    eventTypes[taco.type] += 1;
+})
+
+console.log("Emily's solution: " + eventTypes);
 
 // List all Github users who submitted a pull request that was approved by Steve.
 console.log("-----part 3")
 for (let i = 0; i < githubData.length; i++) {
     if (githubData[i].type === "PullRequestEvent") {
+        
         console.log("PullRequestEvent :" + githubData[i].payload.pull_request.user.login)
     } else {}
 }
