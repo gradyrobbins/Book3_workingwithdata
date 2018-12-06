@@ -37,6 +37,7 @@ console.table(counts);
 
 
 console.log("-----part 2, EmLem's style")
+console.log("How many of each event type are there? (PullRequestEvent, PushEvent, etc)")
 // courtesy EmLem:
 let eventTypes = {
     PushEvent: 0,
@@ -45,11 +46,13 @@ let eventTypes = {
     DeleteEvent: 0,
     CreateEvent: 0
 };
-githubData.forEach(taco => {
-    eventTypes[taco.type] += 1;
-})
 
-console.log("Emily's solution: " + eventTypes);
+githubData.forEach(stevent => {
+    eventTypes[stevent.type] += 1;
+});
+
+console.log("Emily's solution: " );
+console.table(eventTypes);
 
 // List all Github users who submitted a pull request that was approved by Steve.
 console.log("-----part 3")
@@ -81,6 +84,24 @@ for (var i = 0; i < arr4.length; i++) {
 }
 console.table(counts4);
 
+console.log("-----part 4")
+console.log("Emily's solution:")
+console.log("List all repositories on which Steve had an event, and show how many events were on each one.")
+let reposEvents = {
+    "nashville-software-school/client-side-mastery": 0,
+    "nashville-software-school/bangazon-llc": 0,
+    "stevebrownlee/vps-setup": 0,
+    "nss-day-cohort-27/brenda-snack-cake-store": 0
+}
+
+githubData.forEach(eventObj => {
+    // console.log("repo name", eventObj.repo.name)
+    reposEvents[eventObj.repo.name] ++;
+})
+
+console.log("repos and their events")
+console.table(reposEvents)
+
 console.log("---------part 5")
 console.log("Which event had the most number of commits?");
 
@@ -102,6 +123,21 @@ for (var i = 0; i < arr5.length; i++) {
 }
 console.table(counts5);
 
+console.log("----Emily's solution-----part 5")
+// objects with specific event as key and commits.length as value
+let eventsCommits = {};
+
+githubData.forEach(githubEvent => {
+    if (githubEvent.type === "PushEvent") {
+        console.log("The event id as a string: " + githubEvent.id +
+        "commits length: " + githubEvent.payload.commits.length )
+        eventsCommits[githubEvent.id] = githubEvent.payload.commits.length;
+    }
+})
+
+console.log("Which event had the most number of commits?");
+console.log("events and their commits: ")
+console.table(eventsCommits)
 
 console.log("---------parts 6 AND 7")
 console.log("6: Which programming langugages were affected by Steve's events?")
@@ -128,6 +164,13 @@ for (var i = 0; i < arr6.length; i++) {
     counts6[num] = counts6[num] ? counts6[num] + 1 : 1;
 }
 console.table(counts6);
+// console.log("----Emily's approach-----part 6")
+// console.log("6: Which programming langugages were affected by Steve's events?")
+
+
+
+// console.log("----Emily's approach-----part 7")
+// console.log("7: What programming language was the most affected by Steve's events?")
 // console.log ("-------------------Russell's work-----------------------------------------")
 // console.log ("REQUIREMENT #6")
 
@@ -142,7 +185,7 @@ console.table(counts6);
             //             if (repos6.indexOf(repoLang) === -1) {
                 //                 repos6.push(repoLang)
                 //             }
-//         }
-//     }   
-// }
-// console.log(`Steve's events affected the programming languages ${repos6[0]} and ${repos6[1]}.`);
+                //         }
+                //     }   
+                // }
+                // console.log(`Steve's events affected the programming languages ${repos6[0]} and ${repos6[1]}.`);
